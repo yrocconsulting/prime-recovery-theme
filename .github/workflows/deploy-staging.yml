@@ -18,8 +18,11 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SG_SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          printf '%s\n' "${{ secrets.SG_SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+          # Fails here if the key is malformed or passphrase-protected; prints the public key fingerprint (safe to share) to compare with SiteGround.
+          ssh-keygen -y -P "" -f ~/.ssh/id_ed25519 > ~/.ssh/id_ed25519.pub
+          ssh-keygen -lf ~/.ssh/id_ed25519.pub
           ssh-keyscan -p "${{ secrets.SG_SSH_PORT }}" "${{ secrets.SG_SSH_HOST }}" >> ~/.ssh/known_hosts
 
       # Only the theme folder is synced. Nothing outside wp-content/themes/prime-recovery is touched.
