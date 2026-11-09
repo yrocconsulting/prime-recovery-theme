@@ -40,6 +40,10 @@ function prime_recovery_schema_graph() {
 		);
 	}
 
+	$products = array_filter( $products, function ( $p ) {
+		return $p['schema'];
+	} );
+
 	$offers = array();
 	foreach ( $products as $key => $p ) {
 		$offers[] = array(
@@ -56,7 +60,7 @@ function prime_recovery_schema_graph() {
 		'description'        => $b['description'],
 		'url'                => $home,
 		'logo'               => prime_recovery_img( 'logo-color.png' ),
-		'image'              => prime_recovery_img( 'nice1-overhead.jpg' ),
+		'image'              => prime_recovery_img( prime_recovery_hero_image() ),
 		'telephone'          => $b['phone_e164'],
 		'faxNumber'          => $b['fax'],
 		'address'            => $address,
@@ -66,7 +70,7 @@ function prime_recovery_schema_graph() {
 		),
 		'department'         => $departments,
 		'founder'            => array( '@type' => 'Person', 'name' => 'Chad Robran', 'jobTitle' => 'Owner' ),
-		'knowsAbout'         => array( 'Cold therapy', 'Compression therapy', 'DVT prevention', 'Neuromuscular electrical stimulation', 'Orthopedic bracing', 'Post-surgical recovery at home' ),
+		'knowsAbout'         => array( 'Orthopedic bracing', 'Custom brace fitting', 'DonJoy bracing', 'Cold therapy', 'Compression therapy', 'Post-surgical recovery at home' ),
 		'makesOffer'         => $offers,
 	);
 	$same_as = array_values( array_filter( $b['social'] ) );
@@ -85,21 +89,15 @@ function prime_recovery_schema_graph() {
 		),
 	);
 
-	$brands = array(
-		'nice1'      => 'NICE Recovery Systems',
-		'plasmaflow' => 'ManaMed',
-		'manaflexx'  => 'ManaMed',
-		'bracing'    => 'DonJoy',
-	);
 	foreach ( $products as $key => $p ) {
 		$item = array(
-			'@type'       => 'bracing' === $key ? 'ProductGroup' : 'Product',
+			'@type'       => $p['group'] ? 'ProductGroup' : 'Product',
 			'@id'         => $home . '#product-' . $key,
 			'name'        => $p['name'],
 			'category'    => $p['kicker'],
 			'description' => $p['summary'],
 			'url'         => $p['url'],
-			'brand'       => array( '@type' => 'Brand', 'name' => $brands[ $key ] ),
+			'brand'       => array( '@type' => 'Brand', 'name' => $p['brand'] ),
 		);
 		if ( $p['image'] ) {
 			$item['image'] = prime_recovery_img( $p['image'] );
@@ -129,7 +127,7 @@ function prime_recovery_schema_graph() {
 }
 
 add_action( 'wp_head', function () {
-	if ( ! prime_recovery_home_option() ) {
+	if ( ! prime_recovery_is_home_design() ) {
 		return;
 	}
 	echo '<script type="application/ld+json">' . wp_json_encode( prime_recovery_schema_graph(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";

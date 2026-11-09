@@ -6,20 +6,10 @@ Every push to `main` deploys `theme/` to the SiteGround **staging** site (primer
 
 Required repo secrets: `SG_SSH_PRIVATE_KEY`, `SG_SSH_HOST`, `SG_SSH_USER`, `SG_SSH_PORT`, `SG_THEME_PATH`, plus `SG_SSH_PASSPHRASE` if the key has a passphrase (keys generated in SiteGround do).
 
-## Home page design options
+## Home page
 
-Three home page designs are in `theme/page-templates/` for the client to choose from. All three share the same business facts (`theme/inc/content.php`) and JSON-LD (`theme/inc/schema.php`: MedicalBusiness, locations, products and FAQPage), following the ai-search-optimization-framework guidance.
+The client chose design Option C. It is `theme/page-templates/home.php` (template "Home"), and `theme/front-page.php` renders it as the site's front page. Business facts live in `theme/inc/content.php` and feed both the page copy and the JSON-LD in `theme/inc/schema.php` (MedicalBusiness, locations, products, FAQPage), following the ai-search-optimization-framework guidance.
 
-| Option | Template | Look |
-| --- | --- | --- |
-| A | Home – Option A (Clean Clinical) | White, top navigation, NICE1 split hero, quick-link tiles |
-| B | Home – Option B (Recovery Circle) | Left navigation, clickable product circle with NICE1 at the center, info menu bars |
-| C | Home – Option C (Bold Performance) | Dark and athletic, full-screen NICE1 hero, stats, Resource Library preview |
-
-How to view them once the theme is active on staging:
-
-- `https://primerecovery.yroc.host/` shows a chooser that links to all three (when the front page is not set to a page using one of these templates).
-- `https://primerecovery.yroc.host/?pr_home=a` (or `b`, `c`) previews one option directly. Preview URLs are marked `noindex`.
-- Or create a page, pick one of the templates under Page Attributes, and set it as the static front page.
-
-Links to Shop, Resource Library, Meet the Team, Our Mission and Connect With Us point at `/shop/`, `/resources/`, `/meet-the-team/`, `/about/` and `/contact/`, which will be built after a design is chosen. Social profile URLs go in `prime_recovery_business()['social']`.
+- Hero photo: add the DonJoy photo as `theme/assets/img/hero-donjoy.jpg` and it replaces the stand-in automatically.
+- Regeomedix copy is a placeholder and is left out of the structured data until the products are confirmed.
+- Links to Shop, Resource Library, Meet the Team, Our Mission and Connect With Us point at `/shop/`, `/resources/`, `/meet-the-team/`, `/about/` and `/contact/`. Social profile URLs go in `prime_recovery_business()['social']`.

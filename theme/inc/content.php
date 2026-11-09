@@ -14,7 +14,7 @@ function prime_recovery_business() {
 	return array(
 		'name'        => 'Prime Recovery',
 		'tagline'     => 'Partners in Patient Recovery',
-		'description' => 'Prime Recovery is a home medical equipment provider based in Corcoran, Minnesota. We deliver and set up at-home recovery devices, including the NICE1 iceless cold + compression therapy system, for patients and the medical professionals who care for them across Minnesota and Wisconsin.',
+		'description' => 'Prime Recovery is a home medical equipment provider based in Corcoran, Minnesota. We deliver, fit and support at-home recovery devices and DonJoy bracing for patients and the medical professionals who care for them across Minnesota and Wisconsin.',
 		'street'      => '20175 County Road 50',
 		'city'        => 'Corcoran',
 		'region'      => 'MN',
@@ -25,9 +25,10 @@ function prime_recovery_business() {
 		'fax'         => '(612) 642-2526',
 		'offices'     => array(
 			array( 'city' => 'Duluth', 'region' => 'MN' ),
-			array( 'city' => 'Bemidji', 'region' => 'MN' ),
+			array( 'city' => 'Brainerd', 'region' => 'MN' ),
+			array( 'city' => 'Rochester', 'region' => 'MN' ),
 			array( 'city' => 'Madison', 'region' => 'WI' ),
-			array( 'city' => 'Green Bay', 'region' => 'WI' ),
+			array( 'city' => 'Eau Claire', 'region' => 'WI' ),
 		),
 		// Replace with the real profile URLs before launch. Empty entries are skipped.
 		'social'      => array(
@@ -79,54 +80,64 @@ function prime_recovery_links() {
 
 function prime_recovery_products() {
 	return array(
+		'bracing'    => array(
+			'name'    => 'DonJoy Bracing',
+			'kicker'  => 'Enovis / DJO',
+			'summary' => 'Off-the-shelf and custom DonJoy bracing, measured and fit by our team, with education for patients and providers.',
+			'url'     => home_url( '/products/bracing/' ),
+			'cta'     => 'Explore DonJoy bracing',
+			'image'   => '',
+			'alt'     => '',
+			'brand'   => 'DonJoy',
+			'group'   => true,
+			'schema'  => true,
+		),
 		'nice1'      => array(
 			'name'    => 'NICE1',
 			'kicker'  => 'Cold + Compression Therapy System',
-			'summary' => 'An iceless system that delivers long-lasting cold and programmable compression therapy. No more buying, storing and filling machines with ice multiple times a day.',
+			'summary' => 'An iceless system that delivers long-lasting cold and programmable compression therapy. No more buying, storing and filling machines with ice.',
 			'url'     => home_url( '/products/nice/' ),
 			'cta'     => 'Discover iceless therapy',
-			'image'   => 'nice1-overhead.jpg',
-			'alt'     => 'Patient using the NICE1 iceless cold and compression wrap on his lower leg, with the NICE1 unit beside him',
+			'image'   => 'nice1-thigh-wrap.jpg',
+			'alt'     => 'NICE1 cold and compression wrap fitted around the thigh and knee',
+			'brand'   => 'NICE Recovery Systems',
+			'group'   => false,
+			'schema'  => true,
 		),
-		'plasmaflow' => array(
-			'name'    => 'PlasmaFlow',
-			'kicker'  => 'Portable DVT Prevention',
-			'summary' => 'An easy-to-use sequential compression system for home or clinical use to help prevent the onset of deep vein thrombosis (DVT).',
-			'url'     => home_url( '/products/plasmaflow/' ),
-			'cta'     => 'Learn about PlasmaFlow',
-			'image'   => 'plasmaflow.jpg',
-			'alt'     => 'PlasmaFlow tubeless compression cuffs on both calves',
-		),
-		'manaflexx'  => array(
-			'name'    => 'ManaFlexx 2',
-			'kicker'  => 'Muscle Stimulator',
-			'summary' => 'The only NMES device designed to eliminate wires and standalone electrodes. Used to treat muscle atrophy due to lack of use or surgery.',
-			'url'     => home_url( '/products/manaflexx2/' ),
-			'cta'     => 'Learn about ManaFlexx 2',
-			'image'   => 'manaflexx2.jpg',
-			'alt'     => 'ManaFlexx 2 wireless muscle stimulator applied to the thigh',
-		),
-		'bracing'    => array(
-			'name'    => 'Bracing',
-			'kicker'  => 'Enovis / DJO',
-			'summary' => 'Off-the-shelf and custom bracing solutions with fittings and education for patients and providers.',
-			'url'     => home_url( '/products/bracing/' ),
-			'cta'     => 'Explore bracing',
+		'regeomedix' => array(
+			'name'    => 'Regeomedix',
+			'kicker'  => 'Partner',
+			// Placeholder copy until the client confirms which Regeomedix products we carry.
+			'summary' => 'Recovery products from our partner Regeomedix, delivered and supported by our team.',
+			'url'     => home_url( '/products/regeomedix/' ),
+			'cta'     => 'Learn about Regeomedix',
 			'image'   => '',
 			'alt'     => '',
+			'brand'   => 'Regeomedix',
+			'group'   => true,
+			// Left out of the structured data until the product details are confirmed.
+			'schema'  => false,
 		),
 	);
 }
 
 /**
- * NICE1 feature list, from the current NICE1 product page.
+ * Hero photo. Drop the DonJoy photo in as assets/img/hero-donjoy.jpg and it
+ * replaces the stand-in automatically.
  */
-function prime_recovery_nice1_features() {
+function prime_recovery_hero_image() {
+	return file_exists( get_theme_file_path( 'assets/img/hero-donjoy.jpg' ) ) ? 'hero-donjoy.jpg' : 'runners.jpg';
+}
+
+/**
+ * DonJoy bracing services, from the current Meet the Team page.
+ */
+function prime_recovery_bracing_points() {
 	return array(
-		array( 'title' => 'Cooling without ice', 'text' => 'State-of-the-art technology delivers therapeutic cooling without ice. The most convenient way to apply cold therapy.' ),
-		array( 'title' => 'Programmable compression', 'text' => 'Intermittent and constant compression improves the effectiveness of cold therapy and promotes healing.' ),
-		array( 'title' => 'Smaller and lighter', 'text' => 'At 8 x 8 x 8 inches and 9 lbs, NICE1 is the smallest and lightest cold + compression device on the market.' ),
-		array( 'title' => 'Simple touch screen', 'text' => 'An intuitive graphical touch screen makes NICE1 easy to operate at home.' ),
+		array( 'title' => 'Off-the-shelf bracing', 'text' => 'DonJoy braces for the knee, ankle, shoulder, back and more, ready when your provider orders them.' ),
+		array( 'title' => 'Custom bracing', 'text' => 'Custom DonJoy braces measured and fit by our team for the right support.' ),
+		array( 'title' => 'Fittings and education', 'text' => 'We fit every brace and show you how to wear and care for it.' ),
+		array( 'title' => 'Provider partnership', 'text' => 'Our Enovis/DJO team educates providers and coordinates bracing for their patients.' ),
 	);
 }
 
@@ -152,24 +163,28 @@ function prime_recovery_testimonials() {
 function prime_recovery_faqs() {
 	return array(
 		array(
-			'q' => 'What is the NICE1 cold + compression therapy system?',
-			'a' => 'NICE1 is an iceless cold + compression therapy device for recovery after injury or surgery. It delivers precise cold therapy without ice and programmable intermittent or constant compression in an 8 x 8 x 8 inch, 9 lb unit with a touch screen.',
+			'q' => 'What does Prime Recovery provide?',
+			'a' => 'Prime Recovery provides at-home recovery devices and bracing after injury or surgery, including DonJoy off-the-shelf and custom bracing and the NICE1 iceless cold + compression system. Our technicians deliver, fit and set up each device and support you through recovery.',
 		),
 		array(
-			'q' => 'Do I need to add ice to the NICE1?',
-			'a' => 'No. NICE1 cools without ice, so there is no buying, storing or refilling ice every few hours during your recovery.',
+			'q' => 'Does Prime Recovery offer DonJoy bracing?',
+			'a' => 'Yes. Prime Recovery carries DonJoy bracing from Enovis/DJO, including off-the-shelf and custom braces, with fittings and education for patients and providers.',
 		),
 		array(
-			'q' => 'How do I get a recovery device from Prime Recovery?',
-			'a' => 'Prime Recovery works with your surgeon or medical provider. Once your device is ordered, a Prime Recovery technician delivers it and shows you how to use it at home. Call (651) 374-9026 with questions.',
+			'q' => 'How do I get a recovery device or brace from Prime Recovery?',
+			'a' => 'Prime Recovery works with your surgeon or medical provider. Once your device or brace is ordered, a Prime Recovery technician delivers it, fits it and shows you how to use it at home. Call (651) 374-9026 with questions.',
 		),
 		array(
 			'q' => 'Where does Prime Recovery serve patients?',
-			'a' => 'Prime Recovery is based in Corcoran, Minnesota, with satellite offices in Duluth and Bemidji, Minnesota, and Madison and Green Bay, Wisconsin.',
+			'a' => 'Prime Recovery is based in Corcoran, Minnesota, with offices in Duluth, Brainerd and Rochester, Minnesota, and Madison and Eau Claire, Wisconsin.',
 		),
 		array(
 			'q' => 'Does Prime Recovery work with clinics and surgeons?',
-			'a' => 'Yes. Prime Recovery partners with medical professionals to provide patients with recovery devices, bracing, delivery, setup and ongoing support, backed by more than 30 years of healthcare experience.',
+			'a' => 'Yes. Prime Recovery partners with medical professionals to provide patients with recovery devices, bracing, delivery, fitting and ongoing support, backed by more than 30 years of healthcare experience.',
+		),
+		array(
+			'q' => 'What is the NICE1 cold + compression system?',
+			'a' => 'NICE1 is an iceless cold + compression therapy device for recovery after injury or surgery. It delivers cold therapy without ice and programmable compression in a small, 9 lb unit with a touch screen.',
 		),
 	);
 }
