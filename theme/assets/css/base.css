@@ -1,4 +1,4 @@
-/* Prime Recovery: shared tokens and components for the home page designs. */
+/* Prime Recovery: shared tokens and components (all pages). */
 
 :root {
 	--pr-blue: #309bff;
@@ -28,7 +28,7 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
 
-body.pr-home {
+body.pr-site {
 	margin: 0;
 	font-family: var(--pr-font);
 	font-size: 17px;
@@ -39,15 +39,15 @@ body.pr-home {
 	overflow-x: hidden;
 }
 
-.pr-home main { overflow-x: clip; }
-.pr-home img { max-width: 100%; height: auto; display: block; }
-.pr-home a { color: var(--pr-blue-600); }
-.pr-home h1, .pr-home h2, .pr-home h3, .pr-home h4 { color: var(--pr-ink); line-height: 1.12; margin: 0 0 .5em; font-weight: 800; letter-spacing: -.02em; }
-.pr-home h1 { font-size: clamp(2.3rem, 5.2vw, 4rem); }
-.pr-home h2 { font-size: clamp(1.8rem, 3.4vw, 2.75rem); }
-.pr-home h3 { font-size: 1.25rem; letter-spacing: -.01em; }
-.pr-home p { margin: 0 0 1em; }
-.pr-home address { font-style: normal; }
+.pr-site main { overflow-x: clip; }
+.pr-site img { max-width: 100%; height: auto; display: block; }
+.pr-site a { color: var(--pr-blue-600); }
+.pr-site h1, .pr-site h2, .pr-site h3, .pr-site h4 { color: var(--pr-ink); line-height: 1.12; margin: 0 0 .5em; font-weight: 800; letter-spacing: -.02em; }
+.pr-site h1 { font-size: clamp(2.3rem, 5.2vw, 4rem); }
+.pr-site h2 { font-size: clamp(1.8rem, 3.4vw, 2.75rem); }
+.pr-site h3 { font-size: 1.25rem; letter-spacing: -.01em; }
+.pr-site p { margin: 0 0 1em; }
+.pr-site address { font-style: normal; }
 
 .wrap { width: 100%; max-width: var(--pr-wrap); margin-inline: auto; padding-inline: var(--pr-gutter); }
 .wrap--narrow { max-width: 860px; }
@@ -86,18 +86,18 @@ body.pr-home {
 }
 .btn:hover { transform: translateY(-1px); }
 .btn .icon { width: 1.1em; height: 1.1em; }
-.pr-home .btn--primary { background: var(--pr-blue); color: #fff; }
-.pr-home .btn--primary:hover { background: var(--pr-blue-600); }
-.pr-home .btn--dark { background: var(--pr-ink); color: #fff; }
-.pr-home .btn--dark:hover { background: var(--pr-ink-2); }
-.pr-home .btn--ghost { border-color: currentColor; color: var(--pr-ink); background: transparent; }
-.pr-home .btn--ghost-light { border-color: rgba(255, 255, 255, .5); color: #fff; background: transparent; }
-.pr-home .btn--ghost-light:hover { border-color: #fff; }
+.pr-site .btn--primary { background: var(--pr-blue); color: #fff; }
+.pr-site .btn--primary:hover { background: var(--pr-blue-600); }
+.pr-site .btn--dark { background: var(--pr-ink); color: #fff; }
+.pr-site .btn--dark:hover { background: var(--pr-ink-2); }
+.pr-site .btn--ghost { border-color: currentColor; color: var(--pr-ink); background: transparent; }
+.pr-site .btn--ghost-light { border-color: rgba(255, 255, 255, .5); color: #fff; background: transparent; }
+.pr-site .btn--ghost-light:hover { border-color: #fff; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
-:where(.pr-home) a:focus-visible,
-:where(.pr-home) button:focus-visible,
-:where(.pr-home) summary:focus-visible { outline: 3px solid var(--pr-blue); outline-offset: 3px; border-radius: 6px; }
+:where(.pr-site) a:focus-visible,
+:where(.pr-site) button:focus-visible,
+:where(.pr-site) summary:focus-visible { outline: 3px solid var(--pr-blue); outline-offset: 3px; border-radius: 6px; }
 
 /* Logo */
 .site-logo { display: inline-block; line-height: 0; }
@@ -163,6 +163,6 @@ body.pr-home {
 	.site-footer__brand { grid-column: 1 / -1; }
 }
 @media (max-width: 520px) {
-	body.pr-home { font-size: 16px; }
+	body.pr-site { font-size: 16px; }
 	.site-footer__grid { grid-template-columns: 1fr; }
 }

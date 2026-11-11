@@ -13,3 +13,11 @@ The client chose design Option C. It is `theme/page-templates/home.php` (templat
 - Hero photo: add the DonJoy photo as `theme/assets/img/hero-donjoy.jpg` and it replaces the stand-in automatically.
 - Regeomedix copy is a placeholder and is left out of the structured data until the products are confirmed.
 - Links to Shop, Resource Library, Meet the Team, Our Mission and Connect With Us point at `/shop/`, `/resources/`, `/meet-the-team/`, `/about/` and `/contact/`. Social profile URLs go in `prime_recovery_business()['social']`.
+
+## Inner pages
+
+The site map lives in `theme/inc/routes.php`: each route has a URL, H1, search title, meta description and a template in `theme/templates/`. A route renders its template whether or not a WordPress page exists at that URL, so pages can be previewed on staging before they are created in WP admin. Once a page exists at the same path (for example "NICE" with parent "Products" for `/products/nice/`), it uses the same template, and anything typed into the page editor is added above the FAQ.
+
+Shared pieces (header, page hero with breadcrumbs, connect band, footer, FAQ, video cards, person cards) are in `theme/inc/template-tags.php`. Every page outputs Organization and WebSite JSON-LD; inner pages add WebPage, BreadcrumbList and whatever the template registers with `prime_recovery_add_schema()`.
+
+Styles: `base.css` (tokens and components), `site.css` (Option C header, footer and shared sections), `pages.css` (inner pages).

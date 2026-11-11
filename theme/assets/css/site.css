@@ -1,11 +1,11 @@
-/* Home page: dark, athletic, high contrast (client-selected Option C). */
+/* Site design: dark, athletic, high contrast (client-selected Option C). Header, footer, shared sections and home page. */
 
 :root { --c-bg: #070b14; --c-bg-2: #0e1524; --c-line: rgba(255, 255, 255, .1); --c-text: #b8c2d3; }
 
-body.pr-home { background: var(--c-bg); color: var(--c-text); }
-.pr-home h1, .pr-home h2, .pr-home h3 { color: #fff; }
-.pr-home .btn--light { background: #fff; color: var(--c-bg); }
-.pr-home .btn--light:hover { background: var(--pr-blue-050); }
+body.pr-site { background: var(--c-bg); color: var(--c-text); }
+.pr-site h1, .pr-site h2, .pr-site h3 { color: #fff; }
+.pr-site .btn--light { background: #fff; color: var(--c-bg); }
+.pr-site .btn--light:hover { background: var(--pr-blue-050); }
 .btn--lg { padding: 1.1em 1.9em; font-size: 1rem; }
 
 /* Header */
@@ -146,12 +146,12 @@ body.pr-home { background: var(--c-bg); color: var(--c-text); }
 .c-connect__actions { display: flex; align-items: center; gap: 20px; }
 
 /* FAQ, dark variant */
-.pr-home .faq { background: var(--c-bg); }
-.pr-home .faq h2 { color: #fff; }
-.pr-home .faq__list, .pr-home .faq__item { border-color: var(--c-line); }
-.pr-home .faq__item summary { color: #fff; }
-.pr-home .faq__item p { color: var(--c-text); }
-.pr-home .site-footer { border-top: 1px solid var(--c-line); }
+.pr-site .faq { background: var(--c-bg); }
+.pr-site .faq h2 { color: #fff; }
+.pr-site .faq__list, .pr-site .faq__item { border-color: var(--c-line); }
+.pr-site .faq__item summary { color: #fff; }
+.pr-site .faq__item p { color: var(--c-text); }
+.pr-site .site-footer { border-top: 1px solid var(--c-line); }
 
 /* Responsive */
 @media (max-width: 1100px) {

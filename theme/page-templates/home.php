@@ -19,14 +19,8 @@ $hero     = prime_recovery_hero_image();
 
 $marquee = array( 'DonJoy bracing', 'Custom fittings', 'Cold + compression therapy', 'Delivered and set up at home', 'Minnesota and Wisconsin', 'Partners in patient recovery' );
 
-$topics = array(
-	array( 'title' => 'Knee', 'text' => 'ACL, meniscus and knee replacement recovery.' ),
-	array( 'title' => 'Shoulder', 'text' => 'Rotator cuff and shoulder surgery recovery.' ),
-	array( 'title' => 'Hip', 'text' => 'Hip replacement and hip arthroscopy recovery.' ),
-	array( 'title' => 'Ankle and foot', 'text' => 'Sprains, fractures and Achilles recovery.' ),
-	array( 'title' => 'Back', 'text' => 'Bracing and support for back injuries.' ),
-	array( 'title' => 'Bracing and device how-tos', 'text' => 'Videos for wearing your brace and using your device.' ),
-);
+$topics = array_slice( prime_recovery_topics(), 0, 5, true );
+$topics['videos'] = array( 'title' => 'Bracing and device how-tos', 'text' => 'Videos for wearing your brace and using your device.' );
 
 $partners = array(
 	array( 'name' => 'DonJoy', 'note' => 'Enovis / DJO bracing' ),
@@ -36,19 +30,7 @@ $partners = array(
 
 prime_recovery_document_open();
 ?>
-<header class="c-header" data-scroll-header>
-	<div class="wrap c-header__inner">
-		<?php prime_recovery_logo( 'reverse' ); ?>
-		<nav class="c-nav" id="c-nav" aria-label="Primary">
-			<?php prime_recovery_menu( 'menu menu--c' ); ?>
-			<div class="c-nav__actions">
-				<?php prime_recovery_social_links( 'social social--c' ); ?>
-				<a class="btn btn--primary" href="<?php echo esc_url( $links['shop']['url'] ); ?>"><?php echo prime_recovery_icon( 'cart' ); // phpcs:ignore ?> Shop</a>
-			</div>
-		</nav>
-		<?php prime_recovery_menu_toggle( 'c-nav' ); ?>
-	</div>
-</header>
+<?php prime_recovery_site_header(); ?>
 
 <main id="main">
 	<section class="c-hero" aria-labelledby="c-hero-title">
@@ -86,27 +68,7 @@ prime_recovery_document_open();
 				</div>
 				<a class="btn btn--ghost-light" href="<?php echo esc_url( $links['shop']['url'] ); ?>">Shop all products <?php echo prime_recovery_icon( 'arrow' ); // phpcs:ignore ?></a>
 			</div>
-			<ul class="c-rail">
-				<?php foreach ( $products as $key => $p ) : ?>
-					<li class="c-prod c-prod--<?php echo esc_attr( $key ); ?>">
-						<a href="<?php echo esc_url( $p['url'] ); ?>">
-							<span class="c-prod__media">
-								<?php if ( $p['image'] ) : ?>
-									<img src="<?php echo esc_url( prime_recovery_img( $p['image'] ) ); ?>" alt="<?php echo esc_attr( $p['alt'] ); ?>" width="675" height="675" loading="lazy">
-								<?php else : ?>
-									<span class="c-prod__placeholder"><?php echo prime_recovery_icon( 'bracing' === $key ? 'brace' : 'heart' ); // phpcs:ignore ?><span><?php echo esc_html( $p['name'] ); ?></span></span>
-								<?php endif; ?>
-							</span>
-							<span class="c-prod__body">
-								<span class="c-prod__kicker"><?php echo esc_html( $p['kicker'] ); ?></span>
-								<span class="c-prod__name"><?php echo esc_html( $p['name'] ); ?></span>
-								<span class="c-prod__text"><?php echo esc_html( $p['summary'] ); ?></span>
-								<span class="c-prod__cta"><?php echo esc_html( $p['cta'] ); ?> <?php echo prime_recovery_icon( 'arrow' ); // phpcs:ignore ?></span>
-							</span>
-						</a>
-					</li>
-				<?php endforeach; ?>
-			</ul>
+			<?php prime_recovery_product_rail(); ?>
 		</div>
 	</section>
 
@@ -148,23 +110,7 @@ prime_recovery_document_open();
 		<div class="wrap">
 			<p class="eyebrow">How it works</p>
 			<h2 id="c-how-title">From surgery to home in three steps</h2>
-			<ol class="c-steps">
-				<li>
-					<span class="c-steps__icon"><?php echo prime_recovery_icon( 'stetho' ); // phpcs:ignore ?></span>
-					<h3>Your provider orders it</h3>
-					<p>We partner with your surgeon or medical provider to get the right brace or device into your recovery plan.</p>
-				</li>
-				<li>
-					<span class="c-steps__icon"><?php echo prime_recovery_icon( 'truck' ); // phpcs:ignore ?></span>
-					<h3>We deliver and fit it</h3>
-					<p>A Prime Recovery technician brings it to you, fits it and shows you exactly how it works.</p>
-				</li>
-				<li>
-					<span class="c-steps__icon"><?php echo prime_recovery_icon( 'home' ); // phpcs:ignore ?></span>
-					<h3>You recover at home</h3>
-					<p>Recover on your schedule, with our team a phone call away.</p>
-				</li>
-			</ol>
+			<?php prime_recovery_how_steps(); ?>
 		</div>
 	</section>
 
@@ -178,10 +124,10 @@ prime_recovery_document_open();
 				<a class="btn btn--dark" href="<?php echo esc_url( $links['resources']['url'] ); ?>">Browse the library</a>
 			</div>
 			<ul class="c-topics">
-				<?php foreach ( $topics as $i => $t ) : ?>
+				<?php $i = 0; foreach ( $topics as $slug => $t ) : ?>
 					<li>
-						<a href="<?php echo esc_url( $links['resources']['url'] ); ?>">
-							<span class="c-topics__num"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
+						<a href="<?php echo esc_url( $links['resources']['url'] . '#' . $slug ); ?>">
+							<span class="c-topics__num"><?php echo esc_html( sprintf( '%02d', ++$i ) ); ?></span>
 							<span class="c-topics__title"><?php echo esc_html( $t['title'] ); ?></span>
 							<span class="c-topics__text"><?php echo esc_html( $t['text'] ); ?></span>
 							<?php echo prime_recovery_icon( 'arrow' ); // phpcs:ignore ?>
@@ -235,18 +181,7 @@ prime_recovery_document_open();
 		</div>
 	</section>
 
-	<section class="c-connect" aria-labelledby="c-connect-title">
-		<div class="wrap c-connect__inner">
-			<div>
-				<h2 id="c-connect-title">Let’s talk recovery.</h2>
-				<p>Patients, families and providers: call <a href="tel:<?php echo esc_attr( $b['phone_e164'] ); ?>"><?php echo esc_html( $b['phone'] ); ?></a>, set up a meeting, or follow along on social.</p>
-			</div>
-			<div class="c-connect__actions">
-				<a class="btn btn--light btn--lg" href="<?php echo esc_url( $links['connect']['url'] ); ?>">Set up a meeting</a>
-				<?php prime_recovery_social_links( 'social social--c' ); ?>
-			</div>
-		</div>
-	</section>
+	<?php prime_recovery_connect_band(); ?>
 
 	<?php prime_recovery_faq_section( 'Questions, answered' ); ?>
 </main>
