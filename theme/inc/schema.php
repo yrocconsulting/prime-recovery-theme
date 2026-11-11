@@ -207,3 +207,22 @@ function prime_recovery_page_schema( $graph, $org_id ) {
 add_action( 'wp_head', function () {
 	echo '<script type="application/ld+json">' . wp_json_encode( prime_recovery_schema_graph(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
 } );
+
+/**
+ * Person node for a team member from prime_recovery_team().
+ */
+function prime_recovery_person_schema( $key, $person ) {
+	$node = array(
+		'@type'       => 'Person',
+		'@id'         => prime_recovery_route_url( 'meet-the-team' ) . '#' . $key,
+		'name'        => $person['name'],
+		'jobTitle'    => $person['role'],
+		'description' => $person['bio'],
+		'email'       => 'mailto:' . $person['email'],
+		'worksFor'    => array( '@id' => home_url( '/' ) . '#organization' ),
+	);
+	if ( ! empty( $person['area'] ) ) {
+		$node['areaServed'] = $person['area'];
+	}
+	return $node;
+}

@@ -31,14 +31,7 @@ prime_recovery_add_schema( array(
 	'provider'    => array( '@id' => home_url( '/' ) . '#organization' ),
 	'areaServed'  => array( array( '@type' => 'State', 'name' => 'Minnesota' ), array( '@type' => 'State', 'name' => 'Wisconsin' ) ),
 ) );
-prime_recovery_add_schema( array(
-	'@type'    => 'Person',
-	'@id'      => prime_recovery_route_url( 'meet-the-team' ) . '#jared',
-	'name'     => $jared['name'],
-	'jobTitle' => $jared['role'],
-	'email'    => 'mailto:' . $jared['email'],
-	'worksFor' => array( '@id' => home_url( '/' ) . '#organization' ),
-) );
+prime_recovery_add_schema( prime_recovery_person_schema( 'jared', $jared ) );
 prime_recovery_add_schema( prime_recovery_faq_schema( $faqs, $url . '#faq' ) );
 
 prime_recovery_page_open();

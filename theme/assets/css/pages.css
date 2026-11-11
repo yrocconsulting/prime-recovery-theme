@@ -140,3 +140,10 @@
 	.person { grid-template-columns: 1fr; padding: 24px 20px; }
 	.spec-table th { width: 40%; }
 }
+
+/* People grid */
+.people { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+.people > div { scroll-margin-top: 110px; }
+.people .person { height: 100%; }
+.p-section--alt .lead { max-width: 64ch; }
+@media (max-width: 800px) { .people { grid-template-columns: 1fr; } }

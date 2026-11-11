@@ -298,6 +298,23 @@ function prime_recovery_team() {
 	);
 }
 
+function prime_recovery_about_faqs() {
+	return array(
+		array(
+			'q' => 'Who owns Prime Recovery?',
+			'a' => 'Prime Recovery is owned by Chad Robran, who has worked in the medical field since 1996 as an orthopedic sales representative and manager. He co-founded BoneFoam and previously owned Excel Medical Solutions, an orthopedic distributor.',
+		),
+		array(
+			'q' => 'Where is Prime Recovery based?',
+			'a' => 'Prime Recovery is based at 20175 County Road 50 in Corcoran, Minnesota, with offices in Duluth, Brainerd and Rochester, Minnesota, and Madison and Eau Claire, Wisconsin.',
+		),
+		array(
+			'q' => 'What is Prime Recovery’s mission?',
+			'a' => 'Prime Recovery partners with medical professionals to give patients the gold standard of care during recovery, so they are fully equipped to get back to normal, daily life at home.',
+		),
+	);
+}
+
 /**
  * Asset URL helper.
  */

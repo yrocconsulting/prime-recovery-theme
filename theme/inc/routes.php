@@ -70,6 +70,7 @@ function prime_recovery_routes() {
 			'seo_title'   => 'Our Mission: The Gold Standard of At-Home Recovery',
 			'description' => 'Prime Recovery partners with medical professionals to bring patients the gold standard of care during recovery at home, backed by 30+ years of healthcare experience.',
 			'template'    => 'templates/about.php',
+			'schema_type' => 'AboutPage',
 		),
 		'contact'             => array(
 			'title'       => 'Connect With Us',
