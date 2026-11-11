@@ -204,6 +204,9 @@ function prime_recovery_breadcrumb_trail() {
 				$trail[] = array( 'name' => $crumb['title'], 'url' => prime_recovery_route_url( $path ) );
 			}
 		}
+	} elseif ( is_singular( 'pr_guide' ) ) {
+		$trail[] = array( 'name' => 'Resource Library', 'url' => prime_recovery_route_url( 'resources' ) );
+		$trail[] = array( 'name' => get_the_title( get_queried_object_id() ), 'url' => get_permalink( get_queried_object_id() ) );
 	} elseif ( is_singular() ) {
 		foreach ( array_reverse( get_post_ancestors( get_queried_object_id() ) ) as $ancestor ) {
 			$trail[] = array( 'name' => get_the_title( $ancestor ), 'url' => get_permalink( $ancestor ) );
@@ -368,7 +371,7 @@ function prime_recovery_video_grid( $videos, $prefix = '' ) {
 		$title = trim( $prefix . ' ' . $v['title'] );
 		$src   = add_query_arg( array( 'h' => $v['hash'], 'dnt' => 1, 'autoplay' => 1 ), 'https://player.vimeo.com/video/' . $v['id'] );
 		?>
-		<li class="v-card">
+		<li class="v-card" id="video-<?php echo esc_attr( $v['id'] ); ?>">
 			<button type="button" class="v-card__play" data-video-src="<?php echo esc_url( $src ); ?>" data-video-title="<?php echo esc_attr( $title ); ?>">
 				<img src="<?php echo esc_url( $v['thumb'] ); ?>" alt="" width="640" height="360" loading="lazy">
 				<span class="v-card__icon" aria-hidden="true"></span>

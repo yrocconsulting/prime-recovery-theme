@@ -19,14 +19,8 @@ $hero     = prime_recovery_hero_image();
 
 $marquee = array( 'DonJoy bracing', 'Custom fittings', 'Cold + compression therapy', 'Delivered and set up at home', 'Minnesota and Wisconsin', 'Partners in patient recovery' );
 
-$topics = array(
-	array( 'title' => 'Knee', 'text' => 'ACL, meniscus and knee replacement recovery.' ),
-	array( 'title' => 'Shoulder', 'text' => 'Rotator cuff and shoulder surgery recovery.' ),
-	array( 'title' => 'Hip', 'text' => 'Hip replacement and hip arthroscopy recovery.' ),
-	array( 'title' => 'Ankle and foot', 'text' => 'Sprains, fractures and Achilles recovery.' ),
-	array( 'title' => 'Back', 'text' => 'Bracing and support for back injuries.' ),
-	array( 'title' => 'Bracing and device how-tos', 'text' => 'Videos for wearing your brace and using your device.' ),
-);
+$topics = array_slice( prime_recovery_topics(), 0, 5, true );
+$topics['videos'] = array( 'title' => 'Bracing and device how-tos', 'text' => 'Videos for wearing your brace and using your device.' );
 
 $partners = array(
 	array( 'name' => 'DonJoy', 'note' => 'Enovis / DJO bracing' ),
@@ -130,10 +124,10 @@ prime_recovery_document_open();
 				<a class="btn btn--dark" href="<?php echo esc_url( $links['resources']['url'] ); ?>">Browse the library</a>
 			</div>
 			<ul class="c-topics">
-				<?php foreach ( $topics as $i => $t ) : ?>
+				<?php $i = 0; foreach ( $topics as $slug => $t ) : ?>
 					<li>
-						<a href="<?php echo esc_url( $links['resources']['url'] ); ?>">
-							<span class="c-topics__num"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
+						<a href="<?php echo esc_url( $links['resources']['url'] . '#' . $slug ); ?>">
+							<span class="c-topics__num"><?php echo esc_html( sprintf( '%02d', ++$i ) ); ?></span>
 							<span class="c-topics__title"><?php echo esc_html( $t['title'] ); ?></span>
 							<span class="c-topics__text"><?php echo esc_html( $t['text'] ); ?></span>
 							<?php echo prime_recovery_icon( 'arrow' ); // phpcs:ignore ?>

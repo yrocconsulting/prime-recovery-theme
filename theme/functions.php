@@ -12,6 +12,7 @@ require_once get_theme_file_path( 'inc/routes.php' );
 require_once get_theme_file_path( 'inc/schema.php' );
 require_once get_theme_file_path( 'inc/template-tags.php' );
 require_once get_theme_file_path( 'inc/contact-form.php' );
+require_once get_theme_file_path( 'inc/guides.php' );
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );

@@ -316,6 +316,21 @@ function prime_recovery_about_faqs() {
 }
 
 /**
+ * Resource Library topics. 'videos' are NICE1 video titles from
+ * prime_recovery_nice_videos(); 'bracing' links the topic to DonJoy bracing.
+ */
+function prime_recovery_topics() {
+	return array(
+		'knee'     => array( 'title' => 'Knee', 'text' => 'ACL, meniscus and knee replacement recovery.', 'videos' => array( 'Knee Wrap', 'Articulating Knee Wrap' ), 'bracing' => true ),
+		'shoulder' => array( 'title' => 'Shoulder', 'text' => 'Rotator cuff and shoulder surgery recovery.', 'videos' => array( 'Shoulder Wrap' ), 'bracing' => true ),
+		'hip'      => array( 'title' => 'Hip', 'text' => 'Hip replacement and hip arthroscopy recovery.', 'videos' => array( 'Hip Wrap' ), 'bracing' => false ),
+		'ankle'    => array( 'title' => 'Ankle and foot', 'text' => 'Sprains, fractures and Achilles recovery.', 'videos' => array( 'Ankle Wrap' ), 'bracing' => true ),
+		'back'     => array( 'title' => 'Back', 'text' => 'Bracing and support for back injuries.', 'videos' => array( 'Lumbar Wrap' ), 'bracing' => true ),
+		'wrist'    => array( 'title' => 'Wrist and hand', 'text' => 'Cold + compression after wrist injury or surgery.', 'videos' => array( 'Wrist Wrap' ), 'bracing' => false ),
+	);
+}
+
+/**
  * Asset URL helper.
  */
 function prime_recovery_img( $file ) {
