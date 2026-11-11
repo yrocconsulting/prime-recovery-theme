@@ -1,0 +1,61 @@
+/* Inner pages: hero band, breadcrumbs, light and dark sections, prose, cards. Built on site.css (Option C). */
+
+/* Hero */
+.p-hero { position: relative; padding: clamp(130px, 16vw, 180px) 0 clamp(56px, 8vw, 96px); background: radial-gradient(ellipse at 85% 0%, rgba(48, 155, 255, .22), transparent 55%), var(--c-bg); overflow: hidden; isolation: isolate; }
+.p-hero::after { content: ""; position: absolute; right: -120px; bottom: -220px; width: 520px; height: 520px; border-radius: 50%; border: 60px solid rgba(48, 155, 255, .07); z-index: -1; }
+.p-hero__inner { display: grid; gap: 40px; align-items: center; }
+.p-hero--media .p-hero__inner { grid-template-columns: 1.15fr .85fr; }
+.p-hero h1 { font-size: clamp(2.3rem, 5.4vw, 4.4rem); font-weight: 900; line-height: 1; letter-spacing: -.035em; text-transform: uppercase; max-width: 16ch; margin-bottom: .35em; }
+.p-hero .eyebrow { color: var(--pr-blue); }
+.p-hero__lead { max-width: 60ch; font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: #d3dae6; margin-bottom: 2rem !important; }
+.p-hero__media img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--pr-radius-lg); box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .7); }
+
+/* Breadcrumbs */
+.crumbs ol { list-style: none; margin: 0 0 1.6rem; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: .82rem; font-weight: 600; letter-spacing: .04em; }
+.crumbs li { display: inline-flex; align-items: center; gap: 10px; color: var(--c-text); }
+.crumbs li + li::before { content: ""; width: 6px; height: 6px; border-top: 2px solid var(--pr-blue); border-right: 2px solid var(--pr-blue); transform: rotate(45deg); }
+.pr-site .crumbs a { color: #fff; text-decoration: none; }
+.pr-site .crumbs a:hover { color: var(--pr-blue); }
+
+/* Sections */
+.p-section { padding-block: clamp(64px, 9vw, 120px); }
+.p-section--light { background: #fff; color: var(--pr-text); border-radius: 40px 40px 0 0; }
+.p-section--light + .p-section--light { border-radius: 0; padding-top: 0; }
+.p-section--alt { background: var(--pr-bg-alt); color: var(--pr-text); }
+.p-section--light h2, .p-section--light h3, .p-section--alt h2, .p-section--alt h3 { color: var(--pr-ink); }
+.p-section--light .eyebrow, .p-section--alt .eyebrow { color: var(--pr-blue-600); }
+.p-section--light + .c-connect, .p-section--alt + .c-connect { margin-top: 0; }
+
+/* Prose (editor content and policy pages) */
+.prose { font-size: 1.05rem; }
+.prose > * + * { margin-top: 1em; }
+.prose h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-top: 1.8em; }
+.prose h3 { margin-top: 1.5em; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li + li { margin-top: .4em; }
+.prose img { border-radius: var(--pr-radius); }
+.prose a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Cards */
+.p-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.pr-site .p-card { display: grid; gap: 8px; height: 100%; padding: 28px 26px; border-radius: var(--pr-radius); border: 1px solid var(--pr-line); background: #fff; color: var(--pr-muted); text-decoration: none; transition: background .25s, border-color .25s, color .25s; }
+.p-card .icon { width: 32px; height: 32px; display: block; color: var(--pr-blue); margin-bottom: 8px; }
+.p-card strong { font-size: 1.2rem; font-weight: 800; color: var(--pr-ink); }
+.pr-site .p-card:hover { background: var(--pr-ink); border-color: var(--pr-ink); color: var(--c-text); }
+.p-card:hover strong { color: #fff; }
+
+/* Post lists */
+.p-list { list-style: none; margin: 0; padding: 0; }
+.p-list li { padding-block: 24px; border-bottom: 1px solid var(--pr-line); }
+.p-list h2 { font-size: 1.4rem; }
+.p-list a { text-decoration: none; }
+
+/* Header highlight for the current section */
+.menu--c > li.current-menu-item > a,
+.menu--c > li.current-menu-ancestor > a,
+.menu--c > li.current-menu-parent > a { color: var(--pr-blue); }
+
+@media (max-width: 900px) {
+	.p-hero--media .p-hero__inner { grid-template-columns: 1fr; }
+	.p-hero__media { max-width: 420px; }
+}

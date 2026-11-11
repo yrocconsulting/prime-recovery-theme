@@ -36,19 +36,7 @@ $partners = array(
 
 prime_recovery_document_open();
 ?>
-<header class="c-header" data-scroll-header>
-	<div class="wrap c-header__inner">
-		<?php prime_recovery_logo( 'reverse' ); ?>
-		<nav class="c-nav" id="c-nav" aria-label="Primary">
-			<?php prime_recovery_menu( 'menu menu--c' ); ?>
-			<div class="c-nav__actions">
-				<?php prime_recovery_social_links( 'social social--c' ); ?>
-				<a class="btn btn--primary" href="<?php echo esc_url( $links['shop']['url'] ); ?>"><?php echo prime_recovery_icon( 'cart' ); // phpcs:ignore ?> Shop</a>
-			</div>
-		</nav>
-		<?php prime_recovery_menu_toggle( 'c-nav' ); ?>
-	</div>
-</header>
+<?php prime_recovery_site_header(); ?>
 
 <main id="main">
 	<section class="c-hero" aria-labelledby="c-hero-title">
@@ -235,18 +223,7 @@ prime_recovery_document_open();
 		</div>
 	</section>
 
-	<section class="c-connect" aria-labelledby="c-connect-title">
-		<div class="wrap c-connect__inner">
-			<div>
-				<h2 id="c-connect-title">Let’s talk recovery.</h2>
-				<p>Patients, families and providers: call <a href="tel:<?php echo esc_attr( $b['phone_e164'] ); ?>"><?php echo esc_html( $b['phone'] ); ?></a>, set up a meeting, or follow along on social.</p>
-			</div>
-			<div class="c-connect__actions">
-				<a class="btn btn--light btn--lg" href="<?php echo esc_url( $links['connect']['url'] ); ?>">Set up a meeting</a>
-				<?php prime_recovery_social_links( 'social social--c' ); ?>
-			</div>
-		</div>
-	</section>
+	<?php prime_recovery_connect_band(); ?>
 
 	<?php prime_recovery_faq_section( 'Questions, answered' ); ?>
 </main>

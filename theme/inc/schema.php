@@ -1,6 +1,6 @@
 <?php
 /**
- * JSON-LD for the home page designs.
+ * JSON-LD for every page.
  *
  * Follows the ai-search-optimization-framework guidance: declare the entity
  * (MedicalBusiness), its locations, its offerings and plain-language answers,
@@ -45,10 +45,10 @@ function prime_recovery_schema_graph() {
 	} );
 
 	$offers = array();
-	foreach ( $products as $key => $p ) {
+	foreach ( $products as $p ) {
 		$offers[] = array(
 			'@type'       => 'Offer',
-			'itemOffered' => array( '@id' => $home . '#product-' . $key ),
+			'itemOffered' => array( '@id' => prime_recovery_product_id( $p ) ),
 		);
 	}
 
@@ -89,36 +89,16 @@ function prime_recovery_schema_graph() {
 		),
 	);
 
-	foreach ( $products as $key => $p ) {
-		$item = array(
-			'@type'       => $p['group'] ? 'ProductGroup' : 'Product',
-			'@id'         => $home . '#product-' . $key,
-			'name'        => $p['name'],
-			'category'    => $p['kicker'],
-			'description' => $p['summary'],
-			'url'         => $p['url'],
-			'brand'       => array( '@type' => 'Brand', 'name' => $p['brand'] ),
-		);
-		if ( $p['image'] ) {
-			$item['image'] = prime_recovery_img( $p['image'] );
-		}
-		$graph[] = $item;
+	if ( ! prime_recovery_is_home_design() ) {
+		return prime_recovery_page_schema( $graph, $org_id );
 	}
 
-	$faq = array();
-	foreach ( prime_recovery_faqs() as $f ) {
-		$faq[] = array(
-			'@type'          => 'Question',
-			'name'           => $f['q'],
-			'acceptedAnswer' => array( '@type' => 'Answer', 'text' => $f['a'] ),
-		);
+	foreach ( $products as $p ) {
+		$graph[] = prime_recovery_product_node( $p );
 	}
-	$graph[] = array(
-		'@type'      => 'FAQPage',
-		'@id'        => $home . '#faq',
-		'about'      => array( '@id' => $org_id ),
-		'mainEntity' => $faq,
-	);
+	$faq          = prime_recovery_faq_schema( prime_recovery_faqs(), $home . '#faq' );
+	$faq['about'] = array( '@id' => $org_id );
+	$graph[]      = $faq;
 
 	return array(
 		'@context' => 'https://schema.org',
@@ -126,9 +106,104 @@ function prime_recovery_schema_graph() {
 	);
 }
 
-add_action( 'wp_head', function () {
-	if ( ! prime_recovery_is_home_design() ) {
-		return;
+function prime_recovery_product_id( $p ) {
+	return $p['url'] . '#product';
+}
+
+/**
+ * Product or ProductGroup node for one entry of prime_recovery_products().
+ */
+function prime_recovery_product_node( $p ) {
+	$item = array(
+		'@type'       => $p['group'] ? 'ProductGroup' : 'Product',
+		'@id'         => prime_recovery_product_id( $p ),
+		'name'        => $p['name'],
+		'category'    => $p['kicker'],
+		'description' => $p['summary'],
+		'url'         => $p['url'],
+		'brand'       => array( '@type' => 'Brand', 'name' => $p['brand'] ),
+	);
+	if ( $p['image'] ) {
+		$item['image'] = prime_recovery_img( $p['image'] );
 	}
+	return $item;
+}
+
+/**
+ * Templates call this before prime_recovery_page_open() to add nodes
+ * (products, people, FAQs) to the page's JSON-LD.
+ */
+function prime_recovery_add_schema( $node ) {
+	$GLOBALS['prime_recovery_schema_nodes'][] = $node;
+}
+
+/**
+ * FAQPage node from a list of q/a pairs, so on-page FAQs and JSON-LD match.
+ */
+function prime_recovery_faq_schema( $faqs, $id ) {
+	$items = array();
+	foreach ( $faqs as $f ) {
+		$items[] = array(
+			'@type'          => 'Question',
+			'name'           => $f['q'],
+			'acceptedAnswer' => array( '@type' => 'Answer', 'text' => $f['a'] ),
+		);
+	}
+	return array(
+		'@type'      => 'FAQPage',
+		'@id'        => $id,
+		'mainEntity' => $items,
+	);
+}
+
+/**
+ * Inner pages: the organization and website, a WebPage with breadcrumbs,
+ * and whatever the template added.
+ */
+function prime_recovery_page_schema( $graph, $org_id ) {
+	$url   = prime_recovery_route() ? prime_recovery_route_url( prime_recovery_current_route() ) : ( is_singular() ? get_permalink() : home_url( add_query_arg( array() ) ) );
+	$trail = prime_recovery_breadcrumb_trail();
+	$crumbs = array();
+	foreach ( $trail as $i => $c ) {
+		$crumbs[] = array(
+			'@type'    => 'ListItem',
+			'position' => $i + 1,
+			'name'     => $c['name'],
+			'item'     => $c['url'],
+		);
+	}
+	$route = prime_recovery_route();
+	$page  = array(
+		'@type'     => isset( $route['schema_type'] ) ? $route['schema_type'] : 'WebPage',
+		'@id'       => $url . '#webpage',
+		'url'       => $url,
+		'name'      => $route ? $route['seo_title'] : wp_get_document_title(),
+		'isPartOf'  => array( '@id' => home_url( '/' ) . '#website' ),
+		'about'     => array( '@id' => $org_id ),
+		'publisher' => array( '@id' => $org_id ),
+	);
+	$description = prime_recovery_meta_description();
+	if ( $description ) {
+		$page['description'] = $description;
+	}
+	if ( count( $crumbs ) > 1 ) {
+		$page['breadcrumb'] = array( '@id' => $url . '#breadcrumb' );
+		$graph[]            = array(
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $url . '#breadcrumb',
+			'itemListElement' => $crumbs,
+		);
+	}
+	$graph[] = $page;
+	if ( ! empty( $GLOBALS['prime_recovery_schema_nodes'] ) ) {
+		$graph = array_merge( $graph, $GLOBALS['prime_recovery_schema_nodes'] );
+	}
+	return array(
+		'@context' => 'https://schema.org',
+		'@graph'   => $graph,
+	);
+}
+
+add_action( 'wp_head', function () {
 	echo '<script type="application/ld+json">' . wp_json_encode( prime_recovery_schema_graph(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
 } );
