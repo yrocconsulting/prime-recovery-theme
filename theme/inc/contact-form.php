@@ -22,6 +22,7 @@ function prime_recovery_contact_recipient() {
 function prime_recovery_contact_topics() {
 	return array(
 		'meeting'  => 'Set up a meeting',
+		'order'    => 'Order or request a product',
 		'device'   => 'Question about a device or brace',
 		'provider' => 'I’m a provider or clinic',
 		'other'    => 'Something else',
@@ -73,6 +74,8 @@ function prime_recovery_contact_form( $default_topic = '' ) {
 	$status = isset( $_GET['sent'] ) ? sanitize_key( wp_unslash( $_GET['sent'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$phone  = prime_recovery_business()['phone'];
 	$topic  = isset( $_GET['topic'] ) ? sanitize_key( wp_unslash( $_GET['topic'] ) ) : $default_topic; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$item   = isset( $_GET['item'] ) ? sanitize_text_field( wp_unslash( $_GET['item'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$notes  = $item ? sprintf( 'I’d like to request: %s', $item ) : '';
 	?>
 	<form class="form" id="contact-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 		<?php if ( '1' === $status ) : ?>
@@ -103,7 +106,7 @@ function prime_recovery_contact_form( $default_topic = '' ) {
 				<?php endforeach; ?>
 			</select>
 		</p>
-		<p class="form__field"><label for="cf-notes">Message</label><textarea id="cf-notes" name="notes" rows="5"></textarea></p>
+		<p class="form__field"><label for="cf-notes">Message</label><textarea id="cf-notes" name="notes" rows="5"><?php echo esc_textarea( $notes ); ?></textarea></p>
 		<p class="form__help">Please don’t include medical details here. We’ll follow up by phone or email.</p>
 		<button class="btn btn--primary btn--lg" type="submit">Send message</button>
 	</form>

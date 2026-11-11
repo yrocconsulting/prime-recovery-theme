@@ -212,3 +212,25 @@
 .guide__meta { font-size: .85rem; color: var(--pr-muted); border-top: 1px solid var(--pr-line); padding-top: 1em; margin-top: 2em !important; }
 @media (max-width: 1000px) { .topic-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .topic-grid { grid-template-columns: 1fr; } }
+
+/* Shop */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 700 .88rem/1 var(--pr-font); padding: 11px 16px; border-radius: 999px; border: 1.5px solid var(--pr-line); background: #fff; color: var(--pr-ink); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--pr-ink); border-color: var(--pr-ink); color: #fff; }
+.shop-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.shop-item { display: flex; flex-direction: column; border: 1px solid var(--pr-line); border-radius: var(--pr-radius-lg); overflow: hidden; background: #fff; }
+.shop-item[hidden] { display: none; }
+.shop-item__media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--pr-bg-alt); }
+.shop-item__media img { width: 100%; height: 100%; object-fit: cover; }
+.shop-item__placeholder { display: grid; place-items: center; height: 100%; background: radial-gradient(circle at 30% 30%, #1d3a66, var(--pr-ink)); color: var(--pr-blue); }
+.shop-item__placeholder .icon { width: 64px; height: 64px; stroke-width: 1.2; }
+.shop-item__body { display: flex; flex-direction: column; gap: 6px; padding: 20px 20px 22px; flex: 1; }
+.shop-item__brand { margin: 0 !important; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--pr-blue-600); }
+.shop-item h3 { font-size: 1.05rem; margin: 0 !important; }
+.shop-item__body > p:not(.shop-item__brand) { margin: 0 !important; font-size: .88rem; color: var(--pr-muted); }
+.shop-item__actions { margin-top: auto; padding-top: 14px; display: flex; align-items: center; gap: 16px; }
+.shop-item__actions .btn { padding: .75em 1.2em; font-size: .88rem; }
+.shop-item__more { font-weight: 700; font-size: .88rem; }
+@media (max-width: 1100px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 800px) { .shop-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .shop-grid { grid-template-columns: 1fr; } }

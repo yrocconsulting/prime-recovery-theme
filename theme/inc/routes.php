@@ -172,3 +172,35 @@ add_action( 'template_redirect', function () {
 		exit;
 	}
 } );
+
+/**
+ * Add theme routes to the WordPress XML sitemap (wp-sitemap.xml) while no
+ * real page exists at their path, so search and AI crawlers find them.
+ */
+add_action( 'init', function () {
+	if ( ! function_exists( 'wp_register_sitemap_provider' ) || ! class_exists( 'WP_Sitemaps_Provider' ) ) {
+		return;
+	}
+	if ( ! class_exists( 'Prime_Recovery_Sitemap_Provider' ) ) {
+		class Prime_Recovery_Sitemap_Provider extends WP_Sitemaps_Provider {
+			public function __construct() {
+				$this->name        = 'prime';
+				$this->object_type = 'prime';
+			}
+			public function get_url_list( $page_num, $object_subtype = '' ) {
+				$urls = array();
+				foreach ( prime_recovery_routes() as $path => $route ) {
+					if ( ! empty( $route['noindex'] ) || ! file_exists( get_theme_file_path( $route['template'] ) ) || get_page_by_path( $path ) ) {
+						continue;
+					}
+					$urls[] = array( 'loc' => prime_recovery_route_url( $path ) );
+				}
+				return $urls;
+			}
+			public function get_max_num_pages( $object_subtype = '' ) {
+				return 1;
+			}
+		}
+	}
+	wp_register_sitemap_provider( 'prime', new Prime_Recovery_Sitemap_Provider() );
+} );

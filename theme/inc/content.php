@@ -331,6 +331,29 @@ function prime_recovery_topics() {
 }
 
 /**
+ * Shop catalog. Items are requested through the contact form (no cart or
+ * payments); swap for WooCommerce later if the client wants online checkout.
+ */
+function prime_recovery_shop_items() {
+	$bracing = home_url( '/products/bracing/' );
+	$nice    = home_url( '/products/nice/' );
+	return array(
+		array( 'name' => 'NICE1 Cold + Compression System', 'cat' => 'cold', 'brand' => 'NICE Recovery Systems', 'text' => 'Iceless cold therapy with programmable compression in an 8 x 8 x 8 inch, 9 lb unit.', 'image' => 'nice1-overhead.jpg', 'url' => $nice ),
+		array( 'name' => 'NICE1 Knee Wrap', 'cat' => 'cold', 'brand' => 'NICE Recovery Systems', 'text' => 'Cold + compression wrap for knee injury and surgery recovery.', 'image' => 'nice1-knee-seated.jpg', 'url' => $nice ),
+		array( 'name' => 'NICE1 Articulating Knee Wrap', 'cat' => 'cold', 'brand' => 'NICE Recovery Systems', 'text' => 'Knee wrap that bends with the joint for range-of-motion recovery.', 'image' => '', 'url' => $nice ),
+		array( 'name' => 'NICE1 Shoulder Wrap', 'cat' => 'cold', 'brand' => 'NICE Recovery Systems', 'text' => 'Cold + compression wrap for shoulder and rotator cuff recovery.', 'image' => '', 'url' => $nice ),
+		array( 'name' => 'NICE1 Hip Wrap', 'cat' => 'cold', 'brand' => 'NICE Recovery Systems', 'text' => 'Cold + compression wrap for hip recovery.', 'image' => 'nice1-thigh-wrap.jpg', 'url' => $nice ),
+		array( 'name' => 'NICE1 Lumbar Wrap', 'cat' => 'cold', 'brand' => 'NICE Recovery Systems', 'text' => 'Cold + compression wrap for the lower back.', 'image' => '', 'url' => $nice ),
+		array( 'name' => 'NICE1 Ankle Wrap', 'cat' => 'cold', 'brand' => 'NICE Recovery Systems', 'text' => 'Cold + compression wrap for ankle and foot recovery.', 'image' => '', 'url' => $nice ),
+		array( 'name' => 'NICE1 Wrist Wrap', 'cat' => 'cold', 'brand' => 'NICE Recovery Systems', 'text' => 'Cold + compression wrap for wrist and hand recovery.', 'image' => '', 'url' => $nice ),
+		array( 'name' => 'DonJoy Knee Bracing', 'cat' => 'bracing', 'brand' => 'DonJoy', 'text' => 'Off-the-shelf and custom DonJoy knee braces, fit by our team.', 'image' => '', 'url' => $bracing ),
+		array( 'name' => 'DonJoy Ankle Bracing', 'cat' => 'bracing', 'brand' => 'DonJoy', 'text' => 'DonJoy ankle braces and walking boots for sprains and fractures.', 'image' => '', 'url' => $bracing ),
+		array( 'name' => 'DonJoy Shoulder Bracing', 'cat' => 'bracing', 'brand' => 'DonJoy', 'text' => 'DonJoy slings and shoulder braces after injury or surgery.', 'image' => '', 'url' => $bracing ),
+		array( 'name' => 'DonJoy Back Bracing', 'cat' => 'bracing', 'brand' => 'DonJoy', 'text' => 'DonJoy back braces for support and recovery.', 'image' => '', 'url' => $bracing ),
+	);
+}
+
+/**
  * Asset URL helper.
  */
 function prime_recovery_img( $file ) {

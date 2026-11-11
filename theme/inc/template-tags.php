@@ -157,7 +157,7 @@ function prime_recovery_site_footer() {
 		</div>
 		<div class="wrap site-footer__legal">
 			<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> Prime Recovery. All rights reserved.</p>
-			<p>Devices are used under the direction of your medical provider.</p>
+			<p>Devices are used under the direction of your medical provider.<?php if ( get_privacy_policy_url() ) : ?> · <a href="<?php echo esc_url( get_privacy_policy_url() ); ?>">Privacy policy</a><?php endif; ?></p>
 		</div>
 	</footer>
 	<?php

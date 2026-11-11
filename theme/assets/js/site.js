@@ -47,3 +47,22 @@
 		frame.focus();
 	});
 })();
+
+/* Shop category filter. */
+(function () {
+	'use strict';
+	var list = document.querySelector('[data-filter-list]');
+	if (!list) {
+		return;
+	}
+	var chips = document.querySelectorAll('[data-filter]');
+	chips.forEach(function (chip) {
+		chip.addEventListener('click', function () {
+			var cat = chip.getAttribute('data-filter');
+			chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+			list.querySelectorAll('[data-cat]').forEach(function (item) {
+				item.hidden = cat !== 'all' && item.getAttribute('data-cat') !== cat;
+			});
+		});
+	});
+})();
