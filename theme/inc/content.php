@@ -190,6 +190,115 @@ function prime_recovery_faqs() {
 }
 
 /**
+ * NICE1 features, from the current NICE product page.
+ */
+function prime_recovery_nice_features() {
+	return array(
+		array( 'icon' => 'feather', 'title' => 'Smaller and lighter', 'text' => 'NICE1 is the smallest and lightest cold + compression therapy device on the market.' ),
+		array( 'icon' => 'touch', 'title' => 'Simple to use', 'text' => 'An intuitive graphical touch screen makes NICE1 easy to operate.' ),
+		array( 'icon' => 'heart', 'title' => 'Design-forward', 'text' => 'Pro-tested design and state-of-the-art technology, built around a better experience for the patient.' ),
+		array( 'icon' => 'snow', 'title' => 'Cooling without ice', 'text' => 'Therapeutic cooling with no ice to buy, store or refill. The most convenient way to apply cold therapy.' ),
+		array( 'icon' => 'pulse', 'title' => 'Programmable compression', 'text' => 'Intermittent and constant compression greatly improve the effectiveness of cold therapy and promote healing.' ),
+		array( 'icon' => 'check', 'title' => 'Faster recovery', 'text' => 'Cooling and compression combined in one easy-to-use device help improve recovery times.' ),
+	);
+}
+
+/**
+ * NICE1 specifications shown in the spec table and Product JSON-LD.
+ */
+function prime_recovery_nice_specs() {
+	return array(
+		'Size'        => '8 x 8 x 8 inches',
+		'Weight'      => '9 lbs',
+		'Cooling'     => 'Iceless, no ice or refilling',
+		'Compression' => 'Programmable intermittent and constant pneumatic compression',
+		'Controls'    => 'Graphical touch screen',
+		'Wraps'       => 'Knee, articulating knee, shoulder, hip, lumbar, ankle and wrist',
+	);
+}
+
+/**
+ * NICE1 how-to videos (Vimeo), from the current NICE product page.
+ */
+function prime_recovery_nice_videos() {
+	return array(
+		array( 'id' => '579526367', 'hash' => 'e53cd5ef1c', 'title' => 'Quickstart Guide', 'seconds' => 53, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199153436-db0cb2a5708ef25072304568d0817d6da7d8318a15bd84f8ad78ddb1d2d2c0a3-d_640?region=us' ),
+		array( 'id' => '579529603', 'hash' => '35d3731584', 'title' => 'Unpacking Guide', 'seconds' => 65, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199119944-cb743e1ae822f6af432705120eb4c047c3ba7347ef685c09da9daecad3eae1d1-d_640?region=us' ),
+		array( 'id' => '579530813', 'hash' => 'f63fa58d79', 'title' => 'Knee Wrap', 'seconds' => 35, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199131030-72697192d9ba38c8ddf772c4a3a668541c37d8450e9983f24f4062718b214e72-d_640?region=us' ),
+		array( 'id' => '579544876', 'hash' => '86cf3a8510', 'title' => 'Articulating Knee Wrap', 'seconds' => 51, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199151604-0fe19b8794f59a3bf420ca18dbfe29638f68fb340eb31c59d432891599074da7-d_640?region=us' ),
+		array( 'id' => '579528890', 'hash' => '09fa666e06', 'title' => 'Shoulder Wrap', 'seconds' => 43, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199118979-9fcb2e26e92bfe7bda6eccbbca48ffa545f975fa230598af0044b0d863c7fae1-d_640?region=us' ),
+		array( 'id' => '568679856', 'hash' => '517b58a8cf', 'title' => 'Hip Wrap', 'seconds' => 61, 'date' => '2021-06-28', 'thumb' => 'https://i.vimeocdn.com/video/1176077590-6eaf1d624189be1534b7b23c88e1bb4bfbd780597fa4a96c9aa400d611163c60-d_640?region=us' ),
+		array( 'id' => '579528466', 'hash' => 'b73b4aec7c', 'title' => 'Lumbar Wrap', 'seconds' => 36, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199131424-8afcc3d80c88d06ca3603f739352aa245221ab79258fecb1de14a6eb9eada9b4-d_640?region=us' ),
+		array( 'id' => '579525755', 'hash' => 'ba0e021550', 'title' => 'Ankle Wrap', 'seconds' => 40, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199112375-513dc45ede8299eeadec3a0a5fc38dd96815387f171160c0f024e4763af6126f-d_640?region=us' ),
+		array( 'id' => '579544898', 'hash' => '57a65c1b2c', 'title' => 'Wrist Wrap', 'seconds' => 44, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199152059-bcd9452fe2207c82b0e5bd428bdf701a0cda7417c0b6d4d10435d56835119a20-d_640?region=us' ),
+		array( 'id' => '579527592', 'hash' => 'd4f7c06499', 'title' => 'Cleaning Guide', 'seconds' => 99, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199153019-f6b8c250f52caeebb9b92e1f6db55f76c91995786f0262abbcd327fab34e405f-d_640?region=us' ),
+		array( 'id' => '579528105', 'hash' => '6bc986bcd9', 'title' => 'Packing Guide', 'seconds' => 48, 'date' => '2021-07-26', 'thumb' => 'https://i.vimeocdn.com/video/1199148779-c7a05e28162812c5e24930b706fed5bc174a131c9ab53c2f34be71cfd869eb56-d_640?region=us' ),
+	);
+}
+
+function prime_recovery_nice_faqs() {
+	return array(
+		array(
+			'q' => 'What is the NICE1 cold + compression system?',
+			'a' => 'NICE1 is an iceless cold + compression therapy device for recovery after injury or surgery. It delivers cold therapy without ice and programmable intermittent or constant compression in a small, 9 lb unit with a touch screen.',
+		),
+		array(
+			'q' => 'Does NICE1 need ice?',
+			'a' => 'No. NICE1 cools without ice, so there is no ice to buy, store or refill every few hours.',
+		),
+		array(
+			'q' => 'Which body areas can NICE1 treat?',
+			'a' => 'NICE1 has wraps for the knee, shoulder, hip, lower back (lumbar), ankle and wrist, plus an articulating knee wrap.',
+		),
+		array(
+			'q' => 'How do I get a NICE1 from Prime Recovery?',
+			'a' => 'Your surgeon or medical provider orders NICE1 as part of your recovery plan. A Prime Recovery technician delivers it, fits the wrap and shows you how to use it at home. Call (651) 374-9026 with questions.',
+		),
+		array(
+			'q' => 'How do I clean and pack up NICE1?',
+			'a' => 'Watch the NICE1 Cleaning Guide and Packing Guide videos on this page, or call Prime Recovery at (651) 374-9026 and our team will walk you through it.',
+		),
+	);
+}
+
+function prime_recovery_bracing_faqs() {
+	return array(
+		array(
+			'q' => 'What DonJoy braces does Prime Recovery offer?',
+			'a' => 'Prime Recovery carries DonJoy bracing from Enovis/DJO, including off-the-shelf braces for the knee, ankle, shoulder, back and more, and custom DonJoy braces measured and fit by our team.',
+		),
+		array(
+			'q' => 'Does Prime Recovery fit custom DonJoy braces?',
+			'a' => 'Yes. Our bracing team measures and fits custom DonJoy braces and shows patients how to wear and care for them.',
+		),
+		array(
+			'q' => 'How do I get a DonJoy brace through Prime Recovery?',
+			'a' => 'Your surgeon or medical provider orders the brace. Prime Recovery then fits it and teaches you how to use it. Call (651) 374-9026 with questions.',
+		),
+		array(
+			'q' => 'Does Prime Recovery work with clinics on bracing?',
+			'a' => 'Yes. Prime Recovery’s Enovis/DJO team, led by Jared Winship, educates providers on bracing, including custom bracing and fittings, and coordinates bracing for their patients.',
+		),
+	);
+}
+
+/**
+ * Team, from the current Meet the Team page.
+ */
+function prime_recovery_team() {
+	return array(
+		'chad'    => array( 'name' => 'Chad Robran', 'role' => 'Owner', 'email' => 'chad@getprimerecovery.com', 'bio' => 'Chad has worked in the medical field since 1996 as an orthopedic sales representative and manager. He was the co-founder and CEO of BoneFoam, a global leader in perioperative patient positioning, and former owner of Excel Medical Solutions, a distributor for leading orthopedic medical companies. Chad helped launch Prime Recovery to expand patient access to top-quality medical products in the comfort of their homes.' ),
+		'jared'   => array( 'name' => 'Jared Winship', 'role' => 'Director of Enovis/DJO', 'email' => 'jared@getprimerecovery.com', 'bio' => 'Jared came to us with over 15 years of experience in the DME field, specializing in bracing. He leads our Enovis/DJO product lines, focusing on educating providers and patients on all things bracing, including custom bracing solutions and fittings.' ),
+		'braydon' => array( 'name' => 'Braydon Hanson', 'role' => 'Director of Business Development', 'email' => 'braydon@getprimerecovery.com', 'bio' => 'Braydon drives growth and expands our reach by identifying new opportunities and building lasting relationships with clients and partners. He works closely with every team member to understand needs, develop tailored solutions and create strategies that deliver real value.' ),
+		'mike'    => array( 'name' => 'Mike Bohnett', 'role' => 'Director of Surgical', 'email' => 'mike@getprimerecovery.com', 'bio' => 'Mike has over 18 years of experience in orthopaedics, specializing in operating room support with extensive product knowledge and surgeon and OR staff education. He oversees the surgical department, working closely with medical device companies to ensure the delivery of products, training and ongoing education.' ),
+		'paul'    => array( 'name' => 'Paul Lemke', 'role' => 'Home Recovery Patient Care Manager', 'email' => 'paul@getprimerecovery.com', 'bio' => 'Paul oversees and coordinates all device deliveries to the field, making sure patients receive their equipment on time and understand how it works. He is known for bringing both a smile and a helping hand to every patient he serves.' ),
+		'sam'     => array( 'name' => 'Sam Jarvis', 'role' => 'Home Recovery Patient Care Associate', 'area' => 'Northern Minnesota', 'email' => 'sam@getprimerecovery.com', 'bio' => 'Sam runs device deliveries to Northern Minnesota, making sure patients receive their equipment on time and know exactly how it works.' ),
+		'ashley'  => array( 'name' => 'Ashley Rutledge', 'role' => 'Home Recovery Patient Care Associate', 'area' => 'Southern Minnesota', 'email' => 'ashley@getprimerecovery.com', 'bio' => 'Ashley runs device deliveries to Southern Minnesota, making sure patients receive their equipment on time and know exactly how it works.' ),
+		'martha'  => array( 'name' => 'Martha Walton', 'role' => 'Home Recovery Patient Care Associate', 'area' => 'Twin Cities metro', 'email' => 'martha@getprimerecovery.com', 'bio' => 'Martha runs device deliveries in the metro area, making sure patients receive their equipment on time and know exactly how it works.' ),
+	);
+}
+
+/**
  * Asset URL helper.
  */
 function prime_recovery_img( $file ) {

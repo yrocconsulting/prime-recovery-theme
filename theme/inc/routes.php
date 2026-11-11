@@ -44,6 +44,8 @@ function prime_recovery_routes() {
 			'seo_title'   => 'Regeomedix Recovery Products',
 			'description' => 'Recovery products from Prime Recovery partner Regeomedix, delivered and supported by our team in Minnesota and Wisconsin.',
 			'template'    => 'templates/product-regeomedix.php',
+			// Kept out of search until the client confirms which Regeomedix products we carry.
+			'noindex'     => true,
 		),
 		'shop'                => array(
 			'title'       => 'Shop',
@@ -106,7 +108,7 @@ function prime_recovery_current_route() {
 	}
 	$found  = '';
 	$routes = prime_recovery_routes();
-	if ( is_page() ) {
+	if ( is_page() && get_queried_object() ) {
 		$uri = get_page_uri( get_queried_object_id() );
 		if ( isset( $routes[ $uri ] ) ) {
 			$found = $uri;
@@ -147,8 +149,8 @@ add_filter( 'pre_handle_404', function ( $handled, $query ) {
 		return $handled;
 	}
 	$GLOBALS['prime_recovery_virtual_route'] = $path;
-	$query->is_404  = false;
-	$query->is_home = false;
+	// The request was parsed as a page that doesn't exist; render it as the theme route instead.
+	$query->init_query_flags();
 	status_header( 200 );
 	return true;
 }, 10, 2 );

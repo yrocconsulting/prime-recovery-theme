@@ -91,6 +91,9 @@ add_action( 'wp_head', function () {
 	}
 	// WordPress prints the canonical link for real pages; routes served by the theme need their own.
 	$route = prime_recovery_route();
+	if ( $route && ! empty( $route['noindex'] ) ) {
+		echo '<meta name="robots" content="noindex, follow">' . "\n";
+	}
 	if ( $route && ! is_singular() ) {
 		echo '<link rel="canonical" href="' . esc_url( prime_recovery_route_url( $route['key'] ) ) . '">' . "\n";
 	}

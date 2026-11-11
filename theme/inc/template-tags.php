@@ -94,14 +94,15 @@ function prime_recovery_menu_toggle( $controls ) {
 	);
 }
 
-function prime_recovery_faq_section( $heading = 'Questions, answered' ) {
+function prime_recovery_faq_section( $heading = 'Questions, answered', $faqs = null, $class = '' ) {
+	$faqs = null === $faqs ? prime_recovery_faqs() : $faqs;
 	?>
-	<section class="faq" id="faq" aria-labelledby="faq-title">
+	<section class="faq<?php echo $class ? ' ' . esc_attr( $class ) : ''; ?>" id="faq" aria-labelledby="faq-title">
 		<div class="wrap wrap--narrow">
 			<p class="eyebrow">FAQ</p>
 			<h2 id="faq-title"><?php echo esc_html( $heading ); ?></h2>
 			<div class="faq__list">
-				<?php foreach ( prime_recovery_faqs() as $i => $f ) : ?>
+				<?php foreach ( $faqs as $i => $f ) : ?>
 					<details class="faq__item"<?php echo 0 === $i ? ' open' : ''; ?>>
 						<summary><?php echo esc_html( $f['q'] ); ?></summary>
 						<p><?php echo esc_html( $f['a'] ); ?></p>
@@ -343,4 +344,136 @@ function prime_recovery_page_close( $connect = true ) {
 	echo '</main>';
 	prime_recovery_site_footer();
 	prime_recovery_document_close();
+}
+
+/**
+ * Seconds to "1:05" and to ISO 8601 ("PT1M5S").
+ */
+function prime_recovery_duration( $seconds, $iso = false ) {
+	$m = intdiv( (int) $seconds, 60 );
+	$s = (int) $seconds % 60;
+	return $iso ? sprintf( 'PT%dM%dS', $m, $s ) : sprintf( '%d:%02d', $m, $s );
+}
+
+/**
+ * Video grid. Each card shows the thumbnail and loads the Vimeo player only
+ * when clicked, so a page of videos stays fast.
+ *
+ * @param array  $videos From prime_recovery_nice_videos().
+ * @param string $prefix Title prefix for the player's accessible name.
+ */
+function prime_recovery_video_grid( $videos, $prefix = '' ) {
+	echo '<ul class="v-grid">';
+	foreach ( $videos as $v ) {
+		$title = trim( $prefix . ' ' . $v['title'] );
+		$src   = add_query_arg( array( 'h' => $v['hash'], 'dnt' => 1, 'autoplay' => 1 ), 'https://player.vimeo.com/video/' . $v['id'] );
+		?>
+		<li class="v-card">
+			<button type="button" class="v-card__play" data-video-src="<?php echo esc_url( $src ); ?>" data-video-title="<?php echo esc_attr( $title ); ?>">
+				<img src="<?php echo esc_url( $v['thumb'] ); ?>" alt="" width="640" height="360" loading="lazy">
+				<span class="v-card__icon" aria-hidden="true"></span>
+				<span class="screen-reader-text">Play video: </span>
+			</button>
+			<p class="v-card__title"><?php echo esc_html( $v['title'] ); ?> <span><?php echo esc_html( prime_recovery_duration( $v['seconds'] ) ); ?></span></p>
+		</li>
+		<?php
+	}
+	echo '</ul>';
+}
+
+/**
+ * VideoObject nodes for JSON-LD.
+ */
+function prime_recovery_video_schema( $videos, $prefix = '' ) {
+	$nodes = array();
+	foreach ( $videos as $v ) {
+		$nodes[] = array(
+			'@type'        => 'VideoObject',
+			'name'         => trim( $prefix . ' ' . $v['title'] ),
+			'description'  => trim( $prefix . ' how-to video: ' . $v['title'] . '.' ),
+			'thumbnailUrl' => $v['thumb'],
+			'uploadDate'   => $v['date'],
+			'duration'     => prime_recovery_duration( $v['seconds'], true ),
+			'embedUrl'     => 'https://player.vimeo.com/video/' . $v['id'] . '?h=' . $v['hash'],
+			'publisher'    => array( '@id' => home_url( '/' ) . '#organization' ),
+		);
+	}
+	return $nodes;
+}
+
+/**
+ * Person card for a team member from prime_recovery_team().
+ */
+function prime_recovery_person_card( $person, $show_bio = true ) {
+	$initials = implode( '', array_map( function ( $w ) {
+		return mb_substr( $w, 0, 1 );
+	}, explode( ' ', $person['name'] ) ) );
+	?>
+	<article class="person">
+		<span class="person__avatar" aria-hidden="true"><?php echo esc_html( $initials ); ?></span>
+		<div>
+			<h3 class="person__name"><?php echo esc_html( $person['name'] ); ?></h3>
+			<p class="person__role"><?php echo esc_html( $person['role'] ); ?><?php echo ! empty( $person['area'] ) ? ' · ' . esc_html( $person['area'] ) : ''; ?></p>
+			<?php if ( $show_bio ) : ?>
+				<p class="person__bio"><?php echo esc_html( $person['bio'] ); ?></p>
+			<?php endif; ?>
+			<a class="person__email" href="mailto:<?php echo esc_attr( $person['email'] ); ?>"><?php echo esc_html( $person['email'] ); ?></a>
+		</div>
+	</article>
+	<?php
+}
+
+/**
+ * Product cards (dark), one per entry of prime_recovery_products().
+ */
+function prime_recovery_product_rail() {
+	$products = prime_recovery_products();
+	?>
+	<ul class="c-rail">
+		<?php foreach ( $products as $key => $p ) : ?>
+			<li class="c-prod c-prod--<?php echo esc_attr( $key ); ?>">
+				<a href="<?php echo esc_url( $p['url'] ); ?>">
+					<span class="c-prod__media">
+						<?php if ( $p['image'] ) : ?>
+							<img src="<?php echo esc_url( prime_recovery_img( $p['image'] ) ); ?>" alt="<?php echo esc_attr( $p['alt'] ); ?>" width="675" height="675" loading="lazy">
+						<?php else : ?>
+							<span class="c-prod__placeholder"><?php echo prime_recovery_icon( 'bracing' === $key ? 'brace' : 'heart' ); // phpcs:ignore ?><span><?php echo esc_html( $p['name'] ); ?></span></span>
+						<?php endif; ?>
+					</span>
+					<span class="c-prod__body">
+						<span class="c-prod__kicker"><?php echo esc_html( $p['kicker'] ); ?></span>
+						<span class="c-prod__name"><?php echo esc_html( $p['name'] ); ?></span>
+						<span class="c-prod__text"><?php echo esc_html( $p['summary'] ); ?></span>
+						<span class="c-prod__cta"><?php echo esc_html( $p['cta'] ); ?> <?php echo prime_recovery_icon( 'arrow' ); // phpcs:ignore ?></span>
+					</span>
+				</a>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+	<?php
+}
+
+/**
+ * "From surgery to home in three steps".
+ */
+function prime_recovery_how_steps() {
+	?>
+	<ol class="c-steps">
+		<li>
+			<span class="c-steps__icon"><?php echo prime_recovery_icon( 'stetho' ); // phpcs:ignore ?></span>
+			<h3>Your provider orders it</h3>
+			<p>We partner with your surgeon or medical provider to get the right brace or device into your recovery plan.</p>
+		</li>
+		<li>
+			<span class="c-steps__icon"><?php echo prime_recovery_icon( 'truck' ); // phpcs:ignore ?></span>
+			<h3>We deliver and fit it</h3>
+			<p>A Prime Recovery technician brings it to you, fits it and shows you exactly how it works.</p>
+		</li>
+		<li>
+			<span class="c-steps__icon"><?php echo prime_recovery_icon( 'home' ); // phpcs:ignore ?></span>
+			<h3>You recover at home</h3>
+			<p>Recover on your schedule, with our team a phone call away.</p>
+		</li>
+	</ol>
+	<?php
 }

@@ -21,6 +21,7 @@
 .p-section { padding-block: clamp(64px, 9vw, 120px); }
 .p-section--light { background: #fff; color: var(--pr-text); border-radius: 40px 40px 0 0; }
 .p-section--light + .p-section--light { border-radius: 0; padding-top: 0; }
+.p-section--alt + .p-section--light { border-radius: 0; }
 .p-section--alt { background: var(--pr-bg-alt); color: var(--pr-text); }
 .p-section--light h2, .p-section--light h3, .p-section--alt h2, .p-section--alt h3 { color: var(--pr-ink); }
 .p-section--light .eyebrow, .p-section--alt .eyebrow { color: var(--pr-blue-600); }
@@ -58,4 +59,84 @@
 @media (max-width: 900px) {
 	.p-hero--media .p-hero__inner { grid-template-columns: 1fr; }
 	.p-hero__media { max-width: 420px; }
+}
+
+/* Tight dark section (stats, product rail) */
+.p-section--tight { padding-block: clamp(48px, 7vw, 88px); }
+.p-section--tight .c-stats__grid { border-top: 0; }
+
+/* Lead text on light sections */
+.p-section--light .lead, .p-section--alt .lead { color: var(--pr-muted); }
+
+/* Split layout */
+.split { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+.split--media { align-items: center; grid-template-columns: 1fr 1fr; }
+.split__img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--pr-radius-lg); }
+
+/* Feature grid */
+.feat-grid { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.feat-grid--2 { grid-template-columns: 1fr 1fr; margin-top: 0; }
+.feat { padding: 30px 28px; border-radius: var(--pr-radius-lg); background: var(--pr-bg-alt); }
+.p-section--alt .feat { background: #fff; }
+.feat h3 { font-size: 1.12rem; margin-bottom: .4em; }
+.feat p { margin: 0; color: var(--pr-muted); font-size: .95rem; }
+.feat__icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--pr-ink); color: var(--pr-blue); margin-bottom: 18px; }
+.feat__icon .icon { width: 24px; height: 24px; }
+
+/* Body-area grid */
+.area-grid { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.area-grid li { padding: 28px 24px; background: #fff; border-radius: var(--pr-radius); border: 1px solid var(--pr-line); }
+.area-grid__num { display: block; font-size: .78rem; font-weight: 800; letter-spacing: .1em; color: var(--pr-blue-600); margin-bottom: 10px; }
+.area-grid h3 { font-size: 1.35rem; }
+.area-grid p { margin: 0; font-size: .92rem; color: var(--pr-muted); }
+.area-grid__more { margin: 28px 0 0 !important; color: var(--pr-muted); }
+
+/* Patients / providers */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.duo__card { padding: clamp(28px, 4vw, 44px); border-radius: var(--pr-radius-lg); background: var(--pr-bg-alt); }
+.duo__card p { margin: 0; color: var(--pr-muted); }
+.duo__card--dark { background: var(--pr-ink); }
+.pr-site .duo__card--dark h3 { color: #fff; }
+.duo__card--dark p { color: var(--c-text); }
+.duo__card--dark .feat__icon { background: var(--pr-blue); color: #fff; }
+
+/* Person */
+.contact-person { margin-top: 56px; max-width: 760px; }
+.person { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; padding: 28px; border-radius: var(--pr-radius-lg); border: 1px solid var(--pr-line); background: #fff; }
+.person__avatar { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--pr-blue-700), var(--pr-blue)); color: #fff; font-weight: 800; font-size: 1.3rem; letter-spacing: .02em; }
+.person__name { font-size: 1.25rem; margin-bottom: .15em !important; }
+.person__role { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--pr-blue-600); margin-bottom: .8em !important; }
+.person__bio { color: var(--pr-muted); font-size: .95rem; }
+.person__email { font-weight: 700; font-size: .92rem; overflow-wrap: anywhere; }
+
+/* Spec table */
+.spec-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .98rem; }
+.spec-table th, .spec-table td { text-align: left; padding: 14px 0; border-bottom: 1px solid var(--pr-line); vertical-align: top; }
+.spec-table th { width: 34%; color: var(--pr-ink); font-weight: 700; padding-right: 16px; }
+.spec-table td { color: var(--pr-muted); }
+
+/* Video cards */
+.v-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 20px; }
+.v-card__play, .v-card__frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--pr-radius); overflow: hidden; background: var(--pr-ink); }
+.v-card__play { position: relative; padding: 0; cursor: pointer; }
+.v-card__play img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s, opacity .3s; opacity: .9; }
+.v-card__play:hover img { transform: scale(1.04); opacity: 1; }
+.v-card__icon { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: var(--pr-blue); box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .5); transition: transform .2s; }
+.v-card__icon::after { content: ""; position: absolute; left: 26px; top: 21px; border-left: 16px solid #fff; border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+.v-card__play:hover .v-card__icon { transform: scale(1.08); }
+.v-card__title { margin: 12px 0 0 !important; font-weight: 700; color: var(--pr-ink); display: flex; justify-content: space-between; gap: 12px; }
+.v-card__title span { font-weight: 600; font-size: .85rem; color: var(--pr-muted); }
+
+/* FAQ on light background */
+.pr-site .faq--light { background: #fff; }
+
+@media (max-width: 1000px) {
+	.feat-grid, .v-grid { grid-template-columns: 1fr 1fr; }
+	.area-grid { grid-template-columns: 1fr 1fr; }
+	.split, .split--media, .duo { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+	.feat-grid, .feat-grid--2, .v-grid, .area-grid { grid-template-columns: 1fr; }
+	.person { grid-template-columns: 1fr; padding: 24px 20px; }
+	.spec-table th { width: 40%; }
 }

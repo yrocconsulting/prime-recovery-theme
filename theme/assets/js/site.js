@@ -28,3 +28,22 @@
 		window.addEventListener('scroll', onScroll, { passive: true });
 	}
 })();
+
+/* Click-to-play video cards: swap the thumbnail for the player. */
+(function () {
+	'use strict';
+	document.addEventListener('click', function (e) {
+		var btn = e.target.closest ? e.target.closest('[data-video-src]') : null;
+		if (!btn) {
+			return;
+		}
+		var frame = document.createElement('iframe');
+		frame.src = btn.getAttribute('data-video-src');
+		frame.title = btn.getAttribute('data-video-title') || 'Video';
+		frame.allow = 'autoplay; fullscreen; picture-in-picture';
+		frame.allowFullscreen = true;
+		frame.className = 'v-card__frame';
+		btn.replaceWith(frame);
+		frame.focus();
+	});
+})();

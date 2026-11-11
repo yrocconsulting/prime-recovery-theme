@@ -74,27 +74,7 @@ prime_recovery_document_open();
 				</div>
 				<a class="btn btn--ghost-light" href="<?php echo esc_url( $links['shop']['url'] ); ?>">Shop all products <?php echo prime_recovery_icon( 'arrow' ); // phpcs:ignore ?></a>
 			</div>
-			<ul class="c-rail">
-				<?php foreach ( $products as $key => $p ) : ?>
-					<li class="c-prod c-prod--<?php echo esc_attr( $key ); ?>">
-						<a href="<?php echo esc_url( $p['url'] ); ?>">
-							<span class="c-prod__media">
-								<?php if ( $p['image'] ) : ?>
-									<img src="<?php echo esc_url( prime_recovery_img( $p['image'] ) ); ?>" alt="<?php echo esc_attr( $p['alt'] ); ?>" width="675" height="675" loading="lazy">
-								<?php else : ?>
-									<span class="c-prod__placeholder"><?php echo prime_recovery_icon( 'bracing' === $key ? 'brace' : 'heart' ); // phpcs:ignore ?><span><?php echo esc_html( $p['name'] ); ?></span></span>
-								<?php endif; ?>
-							</span>
-							<span class="c-prod__body">
-								<span class="c-prod__kicker"><?php echo esc_html( $p['kicker'] ); ?></span>
-								<span class="c-prod__name"><?php echo esc_html( $p['name'] ); ?></span>
-								<span class="c-prod__text"><?php echo esc_html( $p['summary'] ); ?></span>
-								<span class="c-prod__cta"><?php echo esc_html( $p['cta'] ); ?> <?php echo prime_recovery_icon( 'arrow' ); // phpcs:ignore ?></span>
-							</span>
-						</a>
-					</li>
-				<?php endforeach; ?>
-			</ul>
+			<?php prime_recovery_product_rail(); ?>
 		</div>
 	</section>
 
@@ -136,23 +116,7 @@ prime_recovery_document_open();
 		<div class="wrap">
 			<p class="eyebrow">How it works</p>
 			<h2 id="c-how-title">From surgery to home in three steps</h2>
-			<ol class="c-steps">
-				<li>
-					<span class="c-steps__icon"><?php echo prime_recovery_icon( 'stetho' ); // phpcs:ignore ?></span>
-					<h3>Your provider orders it</h3>
-					<p>We partner with your surgeon or medical provider to get the right brace or device into your recovery plan.</p>
-				</li>
-				<li>
-					<span class="c-steps__icon"><?php echo prime_recovery_icon( 'truck' ); // phpcs:ignore ?></span>
-					<h3>We deliver and fit it</h3>
-					<p>A Prime Recovery technician brings it to you, fits it and shows you exactly how it works.</p>
-				</li>
-				<li>
-					<span class="c-steps__icon"><?php echo prime_recovery_icon( 'home' ); // phpcs:ignore ?></span>
-					<h3>You recover at home</h3>
-					<p>Recover on your schedule, with our team a phone call away.</p>
-				</li>
-			</ol>
+			<?php prime_recovery_how_steps(); ?>
 		</div>
 	</section>
 
