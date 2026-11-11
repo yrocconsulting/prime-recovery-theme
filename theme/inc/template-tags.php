@@ -317,7 +317,7 @@ function prime_recovery_connect_band() {
 				<p>Patients, families and providers: call <a href="tel:<?php echo esc_attr( $b['phone_e164'] ); ?>"><?php echo esc_html( $b['phone'] ); ?></a>, set up a meeting, or follow along on social.</p>
 			</div>
 			<div class="c-connect__actions">
-				<a class="btn btn--light btn--lg" href="<?php echo esc_url( $links['connect']['url'] ); ?>">Set up a meeting</a>
+				<a class="btn btn--light btn--lg" href="<?php echo esc_url( add_query_arg( 'topic', 'meeting', $links['connect']['url'] ) . '#contact-form' ); ?>">Set up a meeting</a>
 				<?php prime_recovery_social_links( 'social social--c' ); ?>
 			</div>
 		</div>
